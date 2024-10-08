@@ -82,7 +82,7 @@ class UserOperation extends Command
     protected function updateUser()
     {
         $registrationNumber = $this->ask('Enter user registeration number to update');
-        $user = NewUser::find($registrationNumber);
+        $user = NewUser::where('registration_number', $registrationNumber)->first();
 
         if ($user) {
             $name = $this->ask('Enter new name (leave blank to keep current name)', $user->name);
@@ -103,7 +103,7 @@ class UserOperation extends Command
     protected function deleteUser()
     {
         $registrationNumber = $this->ask('Enter user registeration number to delete');
-        $user = NewUser::find($registrationNumber);
+        $user = NewUser::where('registration_number', $registrationNumber)->first();
 
         if ($user) {
             $user->delete();
