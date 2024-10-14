@@ -55,10 +55,18 @@ class DisplayUsersWithPasswords extends Command
         }
 
         // Display the data in a table format
-        $this->table(
-            ['User Name', 'Phone', 'Address', 'Platform', 'Password'],
-            $data
-        );
+        // $this->table(
+        //     ['User Name', 'Phone', 'Address', 'Platform', 'Password'],
+        //     $data
+        // );
+        foreach ($data as $item) {
+            $this->info("User Name: " . $item['User Name']);
+            $this->info("Phone: " . $item['Phone']);
+            $this->info("Address: " . $item['Address']);
+            $this->info("Platform: " . $item['Platform']);
+            $this->info("Password: " . $item['Password']);
+            $this->info("---------------");
+        }        
 
         // Display pagination links and details
         $this->info('Page ' . $users->currentPage() . ' of ' . $users->lastPage());

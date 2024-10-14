@@ -31,6 +31,7 @@ class UserOperation extends Command
         $this->info('2. Update User');
         $this->info('3. Delete User');
         $this->info('4. Add User');
+        $this->info('5. Select User');
 
         $choice = $this->ask('Enter your choice (1-4)');
 
@@ -47,6 +48,9 @@ class UserOperation extends Command
             case 4:
                 $this->addUser();
                 break;
+            case 5:
+                $this->selectUser();
+                break;
             default:
                 $this->error('Invalid choice!');
                 break;
@@ -61,6 +65,17 @@ class UserOperation extends Command
             $this->info('No users found.');
         } else {
             $this->table(['ID', 'Name', 'Registration Number'], $users->toArray());
+        }
+    }
+    protected function selectUser()
+    {
+        $registrationNumber = $this->ask('Enter user registeration number to view');
+        $user = NewUser::where('registration_number', $registrationNumber)->first();
+        if ($user) {
+            $this->info($user);
+            // $this->table(['ID', 'Name', 'Registration Number'], $user->toArray());
+        } else {
+            $this->info('No user found.');
         }
     }
 

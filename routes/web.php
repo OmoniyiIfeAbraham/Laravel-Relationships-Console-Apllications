@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\UserModel;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $users = UserModel::with('passwords')->get();
+    return response()->json($users);
 });
